@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema de Pedido de Viaturas">
+    <meta name="author" content="3º Sargento Valber Junior">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Sistema de Pedido de Viaturas</title>
+</head>
+<body>
+<nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav>
+<div class="row">
+    <div class="col-4" style="margin-top: 60px;">
+        <a href="/usuarios/cadastro"><button type="button" class="btn btn-primary">Cadastrar Usuário</button></a>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 10px; margin-right: -10px;">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Identidade</th>
+                    <th scope="col">Posto/Grad</th>
+                    <th scope="col">Nome Completo</th>
+                    <th scope="col">Nome de Guerra</th>
+                    <th scope="col">Nome de Usuário</th>
+                    <th scope="col">Senha</th>
+                    <th scope="col">Tipo de Usuário</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.identidade}"></td>
+                    <td th:text="${usuario.postoGraduacao}"></td>
+                    <td th:text="${usuario.nomeCompleto}"></td>
+                    <td th:text="${usuario.nomeDeGuerra}"></td>
+                    <td th:text="${usuario.username}"></td>
+                    <td>*****</td>
+                    <td th:text="${usuario.tipoUsuario}"></td>
+                    <td><a th:href="@{/usuarios/editar/{idusuario}(idusuario=${usuario.id})}"><button class="btn btn-primary">Editar</button></a></td>
+                    <td><a th:href="@{/usuarios/deletar/{idusuario}(idusuario=${usuario.id})}"><button class="btn btn-danger">Exlcuir</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

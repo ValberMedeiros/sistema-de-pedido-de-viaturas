@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sistema de Pedido de Viaturas">
-    <meta name="author" content="3º Sargento Valber Junior">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <link th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet"/>
-    <script th:href="@{webjars/jquery/3.0.0/jquery.min.js}" rel="stylesheet"></script>
-    <script th:href="@{webjars/popper.js/1.14.3/popper.min.js}" rel="stylesheet"></script>
-    <script th:href="@{webjars/bootstrap/4.3.1/js/bootstrap.min.js}" rel="stylesheet"></script>
+<head>
 
-    <title>Sistema de Pedido de Viaturas</title>
 </head>
 <body>
 <nav th:fragment="nav" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -20,21 +10,21 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse" role="tablist">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="pills-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" id="pills-tab" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/usuarios">Usuários</a>
+                <a class="nav-link" id="pills-tab" href="/usuarios">Usuários</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Viaturas</a>
+                <a class="nav-link" id="pills-tab" href="#">Viaturas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Motoristas</a>
+                <a class="nav-link" id="pills-tab" href="#">Motoristas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Movimento de Viaturas</a>
+                <a class="nav-link" id="pills-tab" href="#">Movimento de Viaturas</a>
             </li>
         </ul>
         <form th:action="@{/logout}" method="post">

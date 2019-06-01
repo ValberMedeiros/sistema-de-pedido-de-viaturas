@@ -18,13 +18,16 @@ public class Usuarios implements Serializable, UserDetails {
     private Long id;
 
     @NotBlank
-    private Long identidade;
+    private String identidade;
 
     @NotBlank
     private String postoGraduacao;
 
     @NotBlank
-    private String nome;
+    private String nomeCompleto;
+
+    @NotBlank
+    private String nomeDeGuerra;
 
     @NotBlank
     private String username;
@@ -49,11 +52,11 @@ public class Usuarios implements Serializable, UserDetails {
         this.id = id;
     }
 
-    public Long getIdentidade() {
+    public String getIdentidade() {
         return identidade;
     }
 
-    public void setIdentidade(Long identidade) {
+    public void setIdentidade(String identidade) {
         this.identidade = identidade;
     }
 
@@ -65,12 +68,12 @@ public class Usuarios implements Serializable, UserDetails {
         this.postoGraduacao = postoGraduacao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getUsername() {
@@ -97,6 +100,13 @@ public class Usuarios implements Serializable, UserDetails {
         this.tipoUsuario = tipoUsuario;
     }
 
+    public String getNomeDeGuerra() {
+        return nomeDeGuerra;
+    }
+
+    public void setNomeDeGuerra(String nomeDeGuerra) {
+        this.nomeDeGuerra = nomeDeGuerra;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

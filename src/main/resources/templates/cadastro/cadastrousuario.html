@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema de Pedido de Viaturas">
+    <meta name="author" content="3º Sargento Valber Junior">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Sistema de Pedido de Viaturas</title>
+</head>
+<body>
+<nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav></head>
+<form action="/usuarios/salvarUsuario" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${usuariosobj}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="identidade">Identidade</label>
+            <input type="text" class="form-control" id="identidade" placeholder="Informe a identidade" name="identidade" th:field="*{identidade}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="nomeCompleto">Nome Completo</label>
+            <input type="text" class="form-control" id="nomeCompleto" placeholder="Informe o nome completo" name="nomeCompleto" th:field="*{nomeCompleto}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="nomeDeGuerra">Nome de Guerra</label>
+            <input type="text" class="form-control" id="nomeDeGuerra" placeholder="Informe o nome de guerra" name="nomeDeGuerra" th:field="*{nomeDeGuerra}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="postoGraduacao">Posto/Grad</label>
+            <select class="form-control" name="postoGraduacao" id="postoGraduacao" th:value="${usuariosobj.postoGraduacao}">
+                <option>Selecione</option>
+                <option>Gen Ex</option>
+                <option>Gen Div</option>
+                <option>Gen Bgda</option>
+                <option>Cel</option>
+                <option>Ten Cel</option>
+                <option>Maj</option>
+                <option>Cap</option>
+                <option>1º Ten</option>
+                <option>2º Ten</option>
+                <option>Asp</option>
+                <option>S Ten</option>
+                <option>1º Sgt</option>
+                <option>2º Sgt</option>
+                <option>3º Sgt</option>
+                <option>Cb</option>
+                <option>Sd</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="userName">Nomde de Usuário</label>
+            <input type="text" class="form-control" id="userName" placeholder="Informe o nome de usuário" name="username" th:field="*{username}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" placeholder="Informe a senha do usuário" name="password" th:field="*{password}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="tipoUsuario">Tipo de Usuário</label>
+            <select class="form-control col-md-8" name="tipoUsuario" id="tipoUsuario" th:value="${usuariosobj.tipoUsuario}">
+                <option>Selecione</option>
+                <option>Usuário</option>
+                <option>Operador</option>
+                <option>Mecânico</option>
+                <option>Administrador</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+</body>
+</html>
