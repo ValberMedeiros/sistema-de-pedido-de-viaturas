@@ -15,7 +15,7 @@ public class SistemaDePedidoDeViaturasApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SistemaDePedidoDeViaturasApplication.class, args);
-        System.out.print(new BCryptPasswordEncoder().encode("4321"));
+        System.out.print(new BCryptPasswordEncoder().encode("123"));
     }
 
 }
