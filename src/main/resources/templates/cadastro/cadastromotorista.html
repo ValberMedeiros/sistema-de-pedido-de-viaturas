@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav></head>
-<form action="/usuarios/salvarUsuario" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${usuariosobj}">
+<form action="/motorista/salvarMotorista" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${motoristaobj}">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="id">Id</label>
@@ -36,7 +36,7 @@
         </div>
         <div class="form-group col-md-3">
             <label for="postoGraduacao">Posto/Grad</label>
-            <select class="form-control" name="postoGraduacao" id="postoGraduacao" th:field="*{postoGraduacao}">
+            <select class="form-control" name="postoGraduacao" id="postoGraduacao" th:field="*{postoGraduacaoMotorista}">
 
                 <option th:each="posto : ${postoGrads}"
                         th:value="${posto.getPostoGraduacao_id()}"
@@ -46,31 +46,8 @@
             </select>
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="userName">Nomde de Usuário</label>
-            <input type="text" class="form-control" id="userName" placeholder="Informe o nome de usuário" name="username" th:field="*{username}">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="password">Senha</label>
-            <input type="password" class="form-control" id="password" placeholder="Informe a senha do usuário" name="password" th:field="*{password}">
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="tipoUsuario">Tipo de Usuário</label>
-            <select class="form-control col-md-8" name="tipoUsuario" id="tipoUsuario" th:field="*{roles}">
-
-                <option th:each="roles : ${roles}"
-                        th:value="${roles.getRoles_id()}"
-                        th:utext="${roles.getTipo()}"
-                        th:selected="${roles.getRoles_id() eq roleSelecionado}"
-                ></option>
-            </select>
-        </div>
-    </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <a href="/usuarios"><button type="button" class="btn btn-danger">Cancelar</button></a>
+    <a href="/motorista"><button type="button" class="btn btn-danger">Cancelar</button></a>
 </form>
 </body>
 </html>

@@ -21,6 +21,9 @@ public class PostoGraduacao implements Serializable {
     @OneToMany(mappedBy = "postoGraduacao")
     private List<Usuarios> usuarios;
 
+    @OneToMany(mappedBy = "postoGraduacaoMotorista")
+    private List<Motorista> motoristas;
+
     public List<Usuarios> getUsuarios() {
         return usuarios;
     }

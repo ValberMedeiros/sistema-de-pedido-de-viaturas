@@ -18,10 +18,10 @@
                 <a class="nav-link" href="/usuarios">Usuários</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Viaturas</a>
+                <a class="nav-link" href="/viaturas">Viaturas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Motoristas</a>
+                <a class="nav-link" href="/motorista">Motoristas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Movimento de Viaturas</a>
@@ -33,6 +33,10 @@
             </button>
         </form>
     </div>
+    <script>
+        $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+    </script>
 </nav>
+
 </body>
 </html>
