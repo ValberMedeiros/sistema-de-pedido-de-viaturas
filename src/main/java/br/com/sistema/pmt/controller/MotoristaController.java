@@ -1,16 +1,20 @@
 package br.com.sistema.pmt.controller;
 
-import br.com.sistema.pmt.model.Motorista;
-import br.com.sistema.pmt.model.PostoGraduacao;
-import br.com.sistema.pmt.model.Roles;
-import br.com.sistema.pmt.repository.MotoristaRepository;
-import br.com.sistema.pmt.repository.PostoGraduacaoRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
+import br.com.sistema.pmt.model.Motorista;
+import br.com.sistema.pmt.model.PostoGraduacao;
+import br.com.sistema.pmt.repository.MotoristaRepository;
+import br.com.sistema.pmt.repository.PostoGraduacaoRepository;
 
 @Controller
 public class MotoristaController {
@@ -31,7 +35,7 @@ public class MotoristaController {
         return modelAndView;
     }
 
-    @GetMapping("/motorista/cadastro")
+    @GetMapping("motorista/cadastro")
     public ModelAndView cadastroMotorista(){
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastromotorista");
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
@@ -54,8 +58,8 @@ public class MotoristaController {
         return modelAndView;
     }
 
-    @GetMapping("/motorista/editar/{idmotorista}")
-    public ModelAndView editarUsuario(@PathVariable("idmotorista") Long idmotorista){
+    @GetMapping("motorista/editar/{idmotorista}")
+    public ModelAndView editarMotorista(@PathVariable("idmotorista") Long idmotorista){
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastromotorista");
         Optional<Motorista> motoristaEditar = mr.findById(idmotorista);
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
@@ -63,6 +67,18 @@ public class MotoristaController {
         modelAndView.addObject("postoGrads", listPostoGrad);
         modelAndView.addObject("postoSelecionado", postoGraduacaoSelect.get());
         modelAndView.addObject("motoristaobj", motoristaEditar);
+        return modelAndView;
+    }
+    
+    @GetMapping("motorista/deletar/{idmotorista}")
+    public ModelAndView deletarMotorista(@PathVariable("idmotorista") Long idMotorista){
+        ModelAndView modelAndView = new ModelAndView("lista/motorista");
+        Optional<Motorista> motorista = mr.findById(idMotorista);
+        mr.delete(motorista.get());
+        Iterable<Motorista> listMotoristas = mr.findAll();
+        Iterable<Motorista> motoristaobj = mr.findAll();
+        modelAndView.addObject("motoristaobj", motoristaobj);
+        modelAndView.addObject("motoristas", listMotoristas);
         return modelAndView;
     }
 }

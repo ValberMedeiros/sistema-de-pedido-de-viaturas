@@ -9,8 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.sistema.pmt</groupId>
-    <artifactId>sistema-de-pedido-de-viaturas</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>pedidodeviaturas</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>sistema-de-pedido-de-viaturas</name>
     <description>Demo project for Spring Boot</description>
 
@@ -84,6 +85,7 @@
     </dependencies>
 
     <build>
+    	<finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

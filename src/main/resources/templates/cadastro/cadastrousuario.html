@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav></head>
-<form action="/usuarios/salvarUsuario" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${usuariosobj}">
+<form th:attr="action=@{/usuarios/salvarUsuario}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${usuariosobj}">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="id">Id</label>
@@ -70,7 +70,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <a href="/usuarios"><button type="button" class="btn btn-danger">Cancelar</button></a>
+    <a href="/pedidodeviatura/usuarios"><button type="button" class="btn btn-danger">Cancelar</button></a>
 </form>
 </body>
 </html>

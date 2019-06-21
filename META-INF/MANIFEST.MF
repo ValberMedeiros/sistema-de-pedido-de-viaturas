@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: sistema-de-pedido-de-viaturas
+Main-Class: br.com.sistema.pmt.sistemadepedidodeviaturas.SistemaDePedi
+ doDeViaturasApplication
+

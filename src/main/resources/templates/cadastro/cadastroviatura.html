@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema de Pedido de Viaturas">
+    <meta name="author" content="3º Sargento Valber Junior">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Sistema de Pedido de Viaturas</title>
 </head>
 <body>
+	<nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav>
+	<form th:attr="action=@{/viaturas/salvarViatura}" method="post" style="margin-top: 70px; padding: 0px 10px;" enctype="multipart/form-data" th:object="${viaturasobj}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" name="id" readonly="true" placeholder="#" th:field="*{id}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="placa">Placa</label>
+            <input type="text" class="form-control" id="placa" placeholder="Informe a placa" th:field="*{placa}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="renavan">Renavan</label>
+            <input type="text" class="form-control" id="renavan" placeholder="Informe o renavan" th:field="*{renavan}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="EB">EB</label>
+            <input type="text" class="form-control" id="EB" placeholder="Informe o EB" th:field="*{EB}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="NEE">NEE</label>
+            <input type="text" class="form-control" id="NEE" placeholder="Informe o NEE" th:field="*{NEE}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="chassi">Chassi</label>
+            <input type="text" class="form-control" id="chassi" placeholder="Informe o chassi" th:field="*{chassi}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="combustivel">Combustível</label>
+            <select class="form-control" name="combustivel" id="combustivel" th:field="*{combustivel}">
 
+                <option th:each="combustivel : ${todosCobustivel}"
+                        th:value="${combustivel}"
+                        th:text="${combustivel.descricao}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="capacidadePassageiros">Capacidade de Passageiros</label>
+            <input type="text" class="form-control" id="capacidadePassageiros" placeholder="Informe a capacidade de passageiros" th:field="*{capacidadePassageiros}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="quantidadeDePortas">Quantidade de Portas</label>
+            <input type="text" class="form-control" id="quantidadeDePortas" placeholder="Informe a quantidade de portas" th:field="*{quantidadeDePortas}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="capacidadeDoTanque">Capacidade do Tanque: (Litros)</label>
+            <input type="text" class="form-control" id="capacidadeDoTanque" placeholder="Informe a capacidade do tanque" th:field="*{capacidadeDoTanque}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="autonomia">Autonomia: (Km/L)</label>
+            <input type="text" class="form-control" id="autonomia" placeholder="Informe a autonomia" th:field="*{autonomia}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="utilização">Utilização do veículo:</label>
+            <input type="text" class="form-control" id="utilização" placeholder="Informe a utilização do veículo" th:field="*{utilização}">
+        </div>
+    	<div class="form-group col-md-4">
+            <label for="statusViatura">Condição da Viatura:</label>
+            <select class="form-control" name="statusViatura" id="statusViatura" th:field="*{statusViatura}">
+
+                <option th:each="statusViatura : ${todosStatusViatura}"
+                        th:value="${statusViatura}"
+                        th:text="${statusViatura.descricao}"
+                ></option>
+            </select>
+		</div>    
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a th:href="@{/viaturas}"><button type="button" class="btn btn-danger">Cancelar</button></a>
+</form>
 </body>
 </html>
