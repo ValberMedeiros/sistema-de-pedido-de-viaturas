@@ -14,6 +14,7 @@
 </head>
 <body>
 	<nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav>
+
 	<form th:attr="action=@{/viaturas/salvarViatura}" method="post" style="margin-top: 70px; padding: 0px 10px;" enctype="multipart/form-data" th:object="${viaturasobj}">
     <div class="form-row">
         <div class="form-group col-md-6">
