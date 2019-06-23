@@ -31,6 +31,8 @@ public class Viatura implements Serializable{
 	@NotBlank
     private String chassi;
 
+	@NotBlank
+	private String modelo;
 	
     private Combustivel combustivel;
 
@@ -47,7 +49,7 @@ public class Viatura implements Serializable{
     private Long autonomia;
 
 	@NotBlank
-    private String utilização;
+    private String utilizacao;
 	
 	
 	private StatusViatura statusViatura;
@@ -167,12 +169,21 @@ public class Viatura implements Serializable{
 		this.autonomia = autonomia;
 	}
 
-	public String getUtilização() {
-		return utilização;
+
+	public String getUtilizacao() {
+		return utilizacao;
 	}
 
-	public void setUtilização(String utilização) {
-		this.utilização = utilização;
+	public void setUtilizacao(String utilizacao) {
+		this.utilizacao = utilizacao;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 
 	public StatusViatura getStatusViatura() {

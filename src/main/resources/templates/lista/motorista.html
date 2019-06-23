@@ -8,6 +8,7 @@
         <meta name="author" content="3º Sargento Valber Junior">
         <meta name="generator" content="Jekyll v3.8.5">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -16,38 +17,55 @@
 </head>
 <body>
     <nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav>
-    <div class="row">
-        <div class="col-4" style="margin-top: 60px;">
-            <a th:href="@{/motorista/cadastro}"><button type="button" class="btn btn-primary">Cadastrar Motorista</button></a>
-        </div>
-    </div>
-    <div class="row" style="margin-top: 10px; margin-right: -10px;">
-        <div class="col-12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Identidade</th>
-                        <th scope="col">Posto/Grad</th>
-                        <th scope="col">Nome Completo</th>
-                        <th scope="col">Nome de Guerra</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Excluir</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="motorista : ${motoristas}">
-                        <td th:text="${motorista.id}"></td>
-                        <td th:text="${motorista.identidade}"></td>
-                        <td th:text="${motorista.getPostoGraduacaoMotorista().postoGrad}"></td>
-                        <td th:text="${motorista.nomeCompleto}"></td>
-                        <td th:text="${motorista.nomeDeGuerra}"></td>
-                        <td><a th:href="@{/motorista/editar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-primary">Editar</button></a></td>
-                        <td><a th:href="@{/motorista/deletar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-danger">Exlcuir</button></a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+  
+    <div class="card">
+		<div class="card-header">
+			<h4 class="float-left">Motoristas</h4>
+			<a th:href="@{/motorista/cadastro}"><button title="Cadastrar motorista" type="button" class="btn btn-success float-right far fa-plus-square"></button></a>
+		</div>
+		<div class="card-body">
+			<form class="form form-horizontal" method="get" th:object="${filtro}">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control" type="search" placeholder="Informe o nome a ser pesquisado"
+								autofocus="autofocus" th:field="*{pesquisa}"/>
+							<button type="submit" class="btn btn-default">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		    <div class="row">
+		        <div class="col-12">
+		            <table class="table table-striped">
+		                <thead>
+		                    <tr>
+		                        <th scope="col">#</th>
+		                        <th scope="col">Identidade</th>
+		                        <th scope="col">Posto/Grad</th>
+		                        <th scope="col">Nome Completo</th>
+		                        <th scope="col">Nome de Guerra</th>
+		                        <th scope="col">Editar</th>
+		                        <th scope="col">Excluir</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <tr th:each="motorista : ${motoristas}">
+		                        <td th:text="${motorista.id}"></td>
+		                        <td th:text="${motorista.identidade}"></td>
+		                        <td th:text="${motorista.getPostoGraduacaoMotorista().postoGrad}"></td>
+		                        <td th:text="${motorista.nomeCompleto}"></td>
+		                        <td th:text="${motorista.nomeDeGuerra}"></td>
+		                        <td><a th:href="@{/motorista/editar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-primary">Editar</button></a></td>
+		                        <td><a th:href="@{/motorista/deletar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-danger">Exlcuir</button></a></td>
+		                    </tr>
+		                </tbody>
+		            </table>
+		       </div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

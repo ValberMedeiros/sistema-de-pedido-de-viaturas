@@ -14,7 +14,7 @@ public class Usuarios implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Informe a identidade")
     private String identidade;
 
     @ManyToOne
@@ -25,16 +25,16 @@ public class Usuarios implements Serializable, UserDetails {
     @org.hibernate.annotations.ForeignKey(name = "roles_id")
     private Roles roles;
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome completo")
     private String nomeCompleto;
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome de guerra")
     private String nomeDeGuerra;
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome de usuário")
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "Informe uma senha")
     private String password;
 
     private static final long serialVersionUID = 1L;

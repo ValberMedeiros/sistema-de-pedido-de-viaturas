@@ -20,6 +20,7 @@ import br.com.sistema.pmt.model.StatusViatura;
 import br.com.sistema.pmt.model.Usuarios;
 import br.com.sistema.pmt.model.Viatura;
 import br.com.sistema.pmt.repository.ViaturaRepository;
+import br.com.sistema.pmt.repository.filter.Filter;
 
 @Controller
 public class ViaturaController {
@@ -28,8 +29,11 @@ public class ViaturaController {
 	public ViaturaRepository vr;
 	
     @RequestMapping(method = RequestMethod.GET, value = "/viaturas")
-    public ModelAndView inicio(){
+    public ModelAndView inicio(@ModelAttribute("filtro")Filter filtro){
         ModelAndView modelAndView = new ModelAndView("lista/viaturas");
+        String pesquisa = filtro.getPesquisa() == null? "" : filtro.getPesquisa();
+        List<Viatura> viaturas = vr.findByPlacaIgnoreCaseContainingOrderByPlaca(pesquisa);
+        modelAndView.addObject("viaturas", viaturas);
         return modelAndView;
     }
     

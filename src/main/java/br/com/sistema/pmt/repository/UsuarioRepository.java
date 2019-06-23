@@ -11,5 +11,5 @@ import br.com.sistema.pmt.model.Usuarios;
 public interface UsuarioRepository  extends CrudRepository<Usuarios, Long> {
     Usuarios findByusername(String username);
     
-    List<Usuarios> findByNomeCompletoContainingOrderByNomeCompleto(String pesquisa);
+    List<Usuarios> findByNomeCompletoIgnoreCaseContainingOrderByNomeCompleto(String pesquisa);
 }

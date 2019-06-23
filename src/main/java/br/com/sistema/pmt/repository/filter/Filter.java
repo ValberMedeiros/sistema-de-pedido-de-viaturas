@@ -1,6 +1,6 @@
 package br.com.sistema.pmt.repository.filter;
 
-public class UsuarioFilter {
+public class Filter {
 	
 	private String pesquisa;
 

@@ -1,10 +1,12 @@
 package br.com.sistema.pmt.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import br.com.sistema.pmt.model.Motorista;
 import br.com.sistema.pmt.model.PostoGraduacao;
 import br.com.sistema.pmt.repository.MotoristaRepository;
 import br.com.sistema.pmt.repository.PostoGraduacaoRepository;
+import br.com.sistema.pmt.repository.filter.Filter;
 
 @Controller
 public class MotoristaController {
@@ -26,11 +29,12 @@ public class MotoristaController {
     private PostoGraduacaoRepository pr;
 
     @RequestMapping(method = RequestMethod.GET, value = "/motorista")
-    public ModelAndView inicio(){
+    public ModelAndView inicio(@ModelAttribute("filtro")Filter filtro){
         ModelAndView modelAndView = new ModelAndView("lista/motorista");
+        String pesquisa = filtro.getPesquisa() == null? "" : filtro.getPesquisa();
+        List<Motorista> motoristas = mr.findByNomeCompletoIgnoreCaseContainingOrderByNomeCompleto(pesquisa);
         Iterable<Motorista> motoristaIt = mr.findAll();
-        Iterable<Motorista> listMotoristas = mr.findAll();
-        modelAndView.addObject("motoristas", listMotoristas);
+        modelAndView.addObject("motoristas", motoristas);
         modelAndView.addObject("motoristaobj", motoristaIt);
         return modelAndView;
     }
@@ -46,8 +50,8 @@ public class MotoristaController {
     }
 
     @PostMapping("**/salvarMotorista")
-    public ModelAndView salvarMotorista(Motorista motorista){
-        ModelAndView modelAndView = new ModelAndView("lista/motorista");
+    public ModelAndView salvarMotorista(@ModelAttribute("filtro")Filter filtro, Motorista motorista){
+        ModelAndView modelAndView = new ModelAndView("redirect:/motorista");
         mr.save(motorista);
         Iterable<Motorista> listMotoristas = mr.findAll();
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
@@ -71,8 +75,8 @@ public class MotoristaController {
     }
     
     @GetMapping("motorista/deletar/{idmotorista}")
-    public ModelAndView deletarMotorista(@PathVariable("idmotorista") Long idMotorista){
-        ModelAndView modelAndView = new ModelAndView("lista/motorista");
+    public ModelAndView deletarMotorista(@ModelAttribute("filtro")Filter filtro, @PathVariable("idmotorista") Long idMotorista){
+        ModelAndView modelAndView = new ModelAndView("redirect:/motorista");
         Optional<Motorista> motorista = mr.findById(idMotorista);
         mr.delete(motorista.get());
         Iterable<Motorista> listMotoristas = mr.findAll();
