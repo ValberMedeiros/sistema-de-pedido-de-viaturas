@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +37,7 @@ public class MotoristaController {
         List<Motorista> motoristas = mr.findByNomeCompletoIgnoreCaseContainingOrderByNomeCompleto(pesquisa);
         Iterable<Motorista> motoristaIt = mr.findAll();
         modelAndView.addObject("motoristas", motoristas);
-        modelAndView.addObject("motoristaobj", motoristaIt);
+        modelAndView.addObject("motorista", motoristaIt);
         return modelAndView;
     }
 
@@ -43,22 +45,24 @@ public class MotoristaController {
     public ModelAndView cadastroMotorista(){
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastromotorista");
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
-        modelAndView.addObject("motoristaobj", new Motorista());
+        modelAndView.addObject("motorista", new Motorista());
         modelAndView.addObject("postoGrads", listPostoGrad);
 
         return modelAndView;
     }
 
     @PostMapping("**/salvarMotorista")
-    public ModelAndView salvarMotorista(@ModelAttribute("filtro")Filter filtro, Motorista motorista){
-        ModelAndView modelAndView = new ModelAndView("redirect:/motorista");
-        mr.save(motorista);
-        Iterable<Motorista> listMotoristas = mr.findAll();
+    public ModelAndView salvarMotorista(@ModelAttribute("filtro")Filter filtro, @Validated Motorista motorista, Errors erros){
+        ModelAndView modelAndView = new ModelAndView("cadastro/cadastromotorista");
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
-        Iterable<Motorista> motoristaobj = mr.findAll();
         modelAndView.addObject("postoGrads", listPostoGrad);
-        modelAndView.addObject("motoristaobj", motoristaobj);
-        modelAndView.addObject("motoristas", listMotoristas);
+        modelAndView.addObject("motorista", motorista);
+        if(erros.hasErrors()) {
+        	return modelAndView;
+        }
+        mr.save(motorista);
+        modelAndView.addObject("motorista", new Motorista());
+        modelAndView.addObject("mensagem", "Motorista salvo com sucesso!");
         return modelAndView;
     }
 
@@ -70,7 +74,7 @@ public class MotoristaController {
         Optional<PostoGraduacao> postoGraduacaoSelect = pr.findById(motoristaEditar.get().getPostoGraduacaoMotorista().getPostoGraduacao_id());
         modelAndView.addObject("postoGrads", listPostoGrad);
         modelAndView.addObject("postoSelecionado", postoGraduacaoSelect.get());
-        modelAndView.addObject("motoristaobj", motoristaEditar);
+        modelAndView.addObject("motorista", motoristaEditar);
         return modelAndView;
     }
     

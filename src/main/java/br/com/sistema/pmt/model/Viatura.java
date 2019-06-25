@@ -16,39 +16,39 @@ public class Viatura implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-	@NotBlank
+	@NotBlank(message = "Informe a placa")
     private String placa;
 	
-	@NotNull
+	@NotNull(message = "Informe o renavan")
     private Long renavan;
 	
-	@NotBlank
+	@NotBlank(message = "Informe o EB")
     private String EB;
 	
-	@NotBlank
+	@NotBlank(message = "Informe o NEE")
     private String NEE;
 
-	@NotBlank
+	@NotBlank(message = "Informe o chassi")
     private String chassi;
 
-	@NotBlank
+	@NotBlank(message = "Informe o modelo")
 	private String modelo;
 	
     private Combustivel combustivel;
 
-	@NotNull
+	@NotNull(message = "Informe a capacidade de passageiros")
     private Long capacidadePassageiros;
 
-	@NotNull
+	@NotNull(message = "Informe a quantidade de portas")
     private Long quantidadeDePortas;
 
-	@NotNull
+	@NotNull(message = "Informe a capacidade do tanque")
     private Long capacidadeDoTanque;
 
-	@NotNull
+	@NotNull(message = "Informe a autonômia")
     private Long autonomia;
 
-	@NotBlank
+	@NotBlank(message = "Informe a finalidade de utilização do veículo")
     private String utilizacao;
 	
 	

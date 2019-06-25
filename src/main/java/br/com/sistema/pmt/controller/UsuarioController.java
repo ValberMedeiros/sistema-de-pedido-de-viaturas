@@ -65,7 +65,7 @@ public class UsuarioController {
         usuarios.setPassword(new BCryptPasswordEncoder().encode(usuarios.getPassword()));
         modelAndView.addObject("postoGrads", listPostoGrad);
         modelAndView.addObject("roles", listRoles);
-        modelAndView.addObject("usuariosobj", new Usuarios());
+        modelAndView.addObject("usuarios", usuarios);
         if(erros.hasErrors()) {
         	return modelAndView;
         }
@@ -76,10 +76,10 @@ public class UsuarioController {
     }
 
     @GetMapping("usuarios/editar/{idusuario}")
-    public ModelAndView editarUsuario(@ModelAttribute("filtro")Filter filtro, @PathVariable("idusuario") Long idpessoa){
+    public ModelAndView editarUsuario(@ModelAttribute("filtro")Filter filtro, @PathVariable("idusuario") Long idpessoa, Errors erros){
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastrousuario");
         Optional<Usuarios> usuarios = ur.findById(idpessoa);
-        modelAndView.addObject("usuariosobj", usuarios.get());
+        modelAndView.addObject("usuarios", usuarios.get());
         Iterable<Roles> listRoles = rr.findAll();
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
         Optional<PostoGraduacao> postoGraduacaoSelect = pr.findById(usuarios.get().getPostoGraduacao().getPostoGraduacao_id());

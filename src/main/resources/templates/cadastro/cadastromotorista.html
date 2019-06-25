@@ -14,7 +14,18 @@
 </head>
 <body>
 <nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav></head>
-<form th:attr="action=@{/motorista/salvarMotorista}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${motoristaobj}">
+<form th:attr="action=@{/motorista/salvarMotorista}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${motorista}">
+    
+    <div class="alert alert-success"
+			th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}">Motorista salvo com sucesso!</span>
+		</div>
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div>
+    
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="id">Id</label>

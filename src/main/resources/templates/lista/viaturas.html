@@ -17,7 +17,7 @@
     <nav th:replace="template :: nav">
 
     </nav>
-	<div class="card" style="margin: 0px 10px;">
+	<div class="card" style="margin: 60px 10px;">
 		<div class="card-header">
 			<h4 class="float-left">Viaturas</h4>
 			<a th:href="@{/viaturas/cadastro}"><button title="Cadastrar viaturas" type="button" class="btn btn-success float-right far fa-plus-square"></button></a>
@@ -75,12 +75,12 @@
 								<td th:text="${viatura.autonomia}"></td>
 								<td th:text="${viatura.utilizacao}"></td>
 								<td><span class="badge" th:text="${viatura.statusViatura.descricao}"
-									th:classappend="${#strings.toString(viatura.statusViatura == 'BAIXADA') ? 'badge-danger' : 'badge-success'}"/></td>
+									th:classappend="${#strings.toString(viatura.statusViatura.descricao == 'Pronta') ? 'badge-success' : 'badge-danger'}"/></td>
 								<td><a
-									th:href="@{/viatura/editar/{idviatura}(idviatura=${viatura.id})}"><button
+									th:href="@{/viaturas/editar/{idviatura}(idviatura=${viatura.id})}"><button
 											class="far fa-edit btn btn-primary"></button></a></td>
 								<td><a
-									th:href="@{/viatura/deletar/{idviatura}(idviatura=${viatura.id})}"><button
+									th:href="@{/viaturas/deletar/{idviatura}(idviatura=${viatura.id})}"><button
 											class="far fa-trash-alt btn btn-danger"></button></a></td>
 							</tr>
 						</tbody>

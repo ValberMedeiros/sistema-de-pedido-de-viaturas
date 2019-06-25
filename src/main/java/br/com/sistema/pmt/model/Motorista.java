@@ -12,13 +12,13 @@ public class Motorista implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Informe a identidade")
     private String identidade;
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome completo")
     private String nomeCompleto;
 
-    @NotBlank
+    @NotBlank(message = "Informe o nome de guerra")
     private String nomeDeGuerra;
 
     @ManyToOne
