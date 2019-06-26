@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -61,7 +62,6 @@
 								<th scope="col">Nome de Guerra</th>
 								<th scope="col">Nome de Usuário</th>
 								<th scope="col">Senha</th>
-								<th scope="col">Tipo de Usuário</th>
 								<th scope="col">Editar</th>
 								<th scope="col">Excluir</th>
 							</tr>
@@ -75,7 +75,6 @@
 								<td th:text="${usuario.nomeDeGuerra}"></td>
 								<td th:text="${usuario.username}"></td>
 								<td>*****</td>
-								<td th:text="${usuario.getRoles().getTipo()}"></td>
 								<td><a
 									th:href="@{/usuarios/editar/{idusuario}(idusuario=${usuario.id})}"><button
 											class="far fa-edit btn btn-primary"></button></a></td>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,13 +67,12 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="tipoUsuario">Tipo de Usuário</label>
-            <select class="form-control col-md-8" name="tipoUsuario" id="tipoUsuario" th:field="*{roles}">
+            <label for="role">Tipo de Usuário</label>
+            <select multiple class="form-control col-md-8" name="roles" id="role" th:field="*{roles}">
 
-                <option th:each="roles : ${roles}"
-                        th:value="${roles.getRoles_id()}"
-                        th:utext="${roles.getTipo()}"
-                        th:selected="${roles.getRoles_id() eq roleSelecionado}"
+                <option th:each="role : ${roles}"
+                        th:value="${role.getId()}"
+                        th:utext="${role.getNomeRole()}"
                 ></option>
             </select>
         </div>

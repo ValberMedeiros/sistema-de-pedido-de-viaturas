@@ -1,5 +1,6 @@
 package br.com.sistema.pmt.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.sistema.pmt.model.Motorista;
 import br.com.sistema.pmt.model.PostoGraduacao;
+import br.com.sistema.pmt.model.StatusMotorista;
+import br.com.sistema.pmt.model.StatusViatura;
+import br.com.sistema.pmt.model.Viatura;
 import br.com.sistema.pmt.repository.MotoristaRepository;
 import br.com.sistema.pmt.repository.PostoGraduacaoRepository;
 import br.com.sistema.pmt.repository.filter.Filter;
@@ -88,5 +92,10 @@ public class MotoristaController {
         modelAndView.addObject("motoristaobj", motoristaobj);
         modelAndView.addObject("motoristas", listMotoristas);
         return modelAndView;
+    }
+    
+    @ModelAttribute("todosStatusMotorista")
+    public List<StatusMotorista> todosStatusMotorista(){
+    	return Arrays.asList(StatusMotorista.values());
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Usuarios implements Serializable, UserDetails {
@@ -21,9 +22,16 @@ public class Usuarios implements Serializable, UserDetails {
     @org.hibernate.annotations.ForeignKey(name = "postoGraduacao_id")
     private PostoGraduacao postoGraduacao;
 
-    @ManyToOne
-    @org.hibernate.annotations.ForeignKey(name = "roles_id")
-    private Roles roles;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarios_role",
+    	joinColumns = @JoinColumn(name = "usuario_id", 
+    				  referencedColumnName = "id",
+    				  table = "usuarios"),
+    	inverseJoinColumns = @JoinColumn(name = "role_id",
+    				  referencedColumnName = "id",
+    				  table = "role"))
+    private List<Role> roles;
 
     @NotBlank(message = "Informe o nome completo")
     private String nomeCompleto;
@@ -49,14 +57,6 @@ public class Usuarios implements Serializable, UserDetails {
 
     public void setPostoGraduacao(PostoGraduacao postoGraduacao) {
         this.postoGraduacao = postoGraduacao;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -106,10 +106,18 @@ public class Usuarios implements Serializable, UserDetails {
     public void setNomeDeGuerra(String nomeDeGuerra) {
         this.nomeDeGuerra = nomeDeGuerra;
     }
+    
+    public List<Role> getRoles() {
+    	return roles;
+    }
+    
+    public void setRoles(List<Role> roles) {
+    	this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override

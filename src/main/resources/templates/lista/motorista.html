@@ -47,6 +47,7 @@
 		                        <th scope="col">Posto/Grad</th>
 		                        <th scope="col">Nome Completo</th>
 		                        <th scope="col">Nome de Guerra</th>
+		                        <th scope="col">Situação</th>
 		                        <th scope="col">Editar</th>
 		                        <th scope="col">Excluir</th>
 		                    </tr>
@@ -58,6 +59,8 @@
 		                        <td th:text="${motorista.getPostoGraduacaoMotorista().postoGrad}"></td>
 		                        <td th:text="${motorista.nomeCompleto}"></td>
 		                        <td th:text="${motorista.nomeDeGuerra}"></td>
+		                        <td><span class="badge" th:text="${motorista.statusMotorista.descricao}"
+									th:classappend="${#strings.toString(motorista.statusMotorista.descricao == 'Pronto') ? 'badge-success' : 'badge-danger'}"/></td>
 		                        <td><a th:href="@{/motorista/editar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-primary">Editar</button></a></td>
 		                        <td><a th:href="@{/motorista/deletar/{idmotorista}(idmotorista=${motorista.id})}"><button class="btn btn-danger">Exlcuir</button></a></td>
 		                    </tr>

@@ -24,8 +24,18 @@ public class Motorista implements Serializable {
     @ManyToOne
     @org.hibernate.annotations.ForeignKey(name = "postoGraduacao_id")
     private PostoGraduacao postoGraduacaoMotorista;
+    
+    private StatusMotorista statusMotorista;
 
-    public Long getId() {
+    public StatusMotorista getStatusMotorista() {
+		return statusMotorista;
+	}
+
+	public void setStatusMotorista(StatusMotorista statusMotorista) {
+		this.statusMotorista = statusMotorista;
+	}
+
+	public Long getId() {
         return id;
     }
 

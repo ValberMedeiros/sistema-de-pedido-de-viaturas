@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 
 </head>
@@ -12,21 +13,25 @@
     <div class="collapse navbar-collapse" id="navbarCollapse" role="tablist">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="@{/}">Home</a>
+                <a class="nav-link" th:href="@{/}">Home</a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
                 <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
                 <a class="nav-link" th:href="@{/viaturas}">Viaturas</a>
             </li>
-            <li class="nav-item">
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
                 <a class="nav-link" th:href="@{/motorista}">Motoristas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/pedido}">Pedir Viatura</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/movimento}">Movimento de Viaturas</a>
             </li>
         </ul>
+
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-light">
                 Sair

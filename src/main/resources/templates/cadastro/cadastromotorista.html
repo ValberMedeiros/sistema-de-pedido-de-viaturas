@@ -27,13 +27,23 @@
 		</div>
     
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-2">
             <label for="id">Id</label>
             <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="identidade">Identidade</label>
             <input type="text" class="form-control" id="identidade" placeholder="Informe a identidade" name="identidade" th:field="*{identidade}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="statusMotorista">Situação</label>
+            <select class="form-control" name="statusMotorista" id="statusMotorista" th:field="*{statusMotorista}">
+
+                <option th:each="status : ${todosStatusMotorista}"
+                        th:value="${status}"
+                        th:utext="${status.getDescricao()}"
+                ></option>
+            </select>
         </div>
     </div>
     <div class="form-row">
@@ -58,7 +68,7 @@
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <a th:href="@{/motorista}"><button type="button" class="btn btn-danger">Cancelar</button></a>
+    <a th:href="@{/motorista}"><button type="button" class="btn btn-danger">Voltar</button></a>
 </form>
 </body>
 </html>
