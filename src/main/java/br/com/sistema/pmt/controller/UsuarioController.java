@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.sistema.pmt.Service.UsuarioLogado;
 import br.com.sistema.pmt.model.PostoGraduacao;
 import br.com.sistema.pmt.model.Role;
 import br.com.sistema.pmt.model.Usuarios;
@@ -36,15 +38,14 @@ public class UsuarioController {
     private RolesRepository rr;
     
     @Autowired
-    private PostoGraduacaoRepository pr;
-    
+    private PostoGraduacaoRepository pr;  
 
     @RequestMapping(method = RequestMethod.GET, value = "/usuarios")
     public ModelAndView inicio(@ModelAttribute("filtro")Filter filtro){
         ModelAndView modelAndView = new ModelAndView("lista/usuario");
     	String pesquisa = filtro.getPesquisa() == null? "" : filtro.getPesquisa();
     	List<Usuarios> usuariosIt = ur.findByNomeCompletoIgnoreCaseContainingOrderByNomeCompleto(pesquisa);
-    	modelAndView.addObject("usuarios", usuariosIt);
+    	modelAndView.addObject("usuarios", usuariosIt);    	
         return modelAndView;
     }
 
@@ -102,6 +103,4 @@ public class UsuarioController {
         modelAndView.addObject("usuarios", usuariosIt);
         return modelAndView;
     }
-    
-    
 }

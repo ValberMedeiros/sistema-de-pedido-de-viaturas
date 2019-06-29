@@ -44,6 +44,9 @@ public class Usuarios implements Serializable, UserDetails {
 
     @NotBlank(message = "Informe uma senha")
     private String password;
+    
+    @OneToMany(mappedBy = "usuarioRemetente")
+    private List<Pedido> pedidos;
 
     private static final long serialVersionUID = 1L;
 
@@ -76,7 +79,7 @@ public class Usuarios implements Serializable, UserDetails {
     }
 
     public String getNomeCompleto() {
-        return nomeCompleto;
+        return nomeCompleto.toUpperCase();
     }
 
     public void setNomeCompleto(String nomeCompleto) {
@@ -100,14 +103,22 @@ public class Usuarios implements Serializable, UserDetails {
     }
 
     public String getNomeDeGuerra() {
-        return nomeDeGuerra;
+        return nomeDeGuerra.toUpperCase();
     }
 
     public void setNomeDeGuerra(String nomeDeGuerra) {
         this.nomeDeGuerra = nomeDeGuerra;
     }
     
-    public List<Role> getRoles() {
+    public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public List<Role> getRoles() {
     	return roles;
     }
     

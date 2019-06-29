@@ -17,5 +17,12 @@
     <nav th:replace="template :: nav">
 
     </nav>
+    <div style="margin: 120px 0px 0px 60px;" th:object="${nomeusuario}">
+    	<h2>Olá <span th:text="*{postoGraduacao.postoGrad}" /> <span th:text="*{nomeDeGuerra}" /></h1>
+    </div>
+    <div style="margin: 60px 0px 0px 60px;">
+    	<h3>Seja bem vindo ao Sistema de Pedidos de Viaturas</h2>
+    	
+    </div>
 </body>
 </html>

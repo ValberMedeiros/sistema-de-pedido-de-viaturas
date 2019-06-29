@@ -1,11 +1,13 @@
 package br.com.sistema.pmt.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -51,6 +53,8 @@ public class Viatura implements Serializable{
 	@NotBlank(message = "Informe a finalidade de utilização do veículo")
     private String utilizacao;
 	
+	@OneToMany(mappedBy = "viaturaDoPedido")
+	private List<Pedido> pedidos;
 	
 	private StatusViatura statusViatura;
  
@@ -188,6 +192,14 @@ public class Viatura implements Serializable{
 
 	public StatusViatura getStatusViatura() {
 		return statusViatura;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	public void setStatusViatura(StatusViatura statusViatura) {
