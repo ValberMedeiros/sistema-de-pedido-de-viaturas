@@ -43,7 +43,7 @@
             <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
         </div>
         <div class="form-group col-md-2">
-            <label for="dataDeEmbarque">Data de embarque</label>
+            <label for="dataDeEmbarque">Data do embarque</label>
             <input type="date" class="form-control" id="dataDeEmbarque" placeholder="Informe a data do embarque" name="dataDeEmbarque" th:field="*{dataDeEmbarque}">
         </div>
         <div class="form-group col-md-2">
@@ -56,21 +56,57 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
+    	<div class="form-group col-md-2">
+            <label for="dataDeChegada">Data da chegada</label>
+            <input type="date" class="form-control" id="dataDeChegada" placeholder="Informe a data de chegada" name="dataDeChegada" th:field="*{dataDeChegada}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="horaDoChegada">Hora da chegada</label>
+            <input type="time" class="form-control" id="horaDoChegada" placeholder="Informe a hora da chegada" name="horaDoChegada" th:field="*{horaDeChegada}">
+        </div>
+        <div class="form-group col-md-8">
             <label for="destino">Destino</label>
             <input type="text" class="form-control" id="destino" placeholder="Informe o destino" name="destino" th:field="*{destino}">
         </div>
-        <div class="form-group col-md-6">
-            <label for="tipoDeViatura">Tipo de viatura</label>
-            <input type="text" class="form-control" id="tipoDeViatura" placeholder="Informe a senha do usuário" name="tipoDeViatura" th:field="*{tipoDeViatura}">
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="tipoDeviatura">Tipo de viatura</label>
+            <select class="form-control" name="tipoDeviatura" id="tipoDeviatura" th:field="*{tipoDeViatura}">
+
+                <option th:each="tipoDeviatura : ${tiposDeViatura}"
+                        th:value="${tipoDeviatura}"
+                        th:text="${tipoDeviatura.getDescricao()}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="finalidade">Finalidade</label>
+            <select class="form-control" name="finalidade" id="finalidade" th:field="*{finalidade}">
+
+                <option th:each="finalidade : ${finalidades}"
+                        th:value="${finalidade}"
+                        th:text="${finalidade.getDescricao()}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-8">
+            <label for="destino">Apresentar-se ao</label>
+            <input type="text" class="form-control" id="apresentacao" placeholder="O motorista devera se apresentar ao" name="apresentacao" th:field="*{apresentacao}">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-            <label for="finalidadeDoPedido">Finalidade do pedido</label>
-            <textarea class="form-control" id="finalidadeDoPedido" row="8" placeholder="Informe a finalidade do pedido" name="finalidadeDoPedido" th:field="*{finalidadeDoPedido}"> </textarea>
+            <label for="missaoDescricao">Descreva a missão</label>
+            <textarea class="form-control" id="missaoDescricao" row="8" placeholder="Descreva a missão" name="missaoDescricao" th:field="*{missaoDescricao}"> </textarea>
         </div>
     </div>
+
+    <div class="form-row">
+
+    </div>
+
     <button type="submit" class="btn btn-primary">Cadastrar</button>
     <a th:href="@{/pedidos}"><button type="button" class="btn btn-danger">Voltar</button></a>
 </form>

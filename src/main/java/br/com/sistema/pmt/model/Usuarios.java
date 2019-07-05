@@ -54,14 +54,6 @@ public class Usuarios implements Serializable, UserDetails {
         return serialVersionUID;
     }
 
-    public PostoGraduacao getPostoGraduacao() {
-        return postoGraduacao;
-    }
-
-    public void setPostoGraduacao(PostoGraduacao postoGraduacao) {
-        this.postoGraduacao = postoGraduacao;
-    }
-
     public Long getId() {
         return id;
     }
@@ -78,14 +70,39 @@ public class Usuarios implements Serializable, UserDetails {
         this.identidade = identidade;
     }
 
+    public PostoGraduacao getPostoGraduacao() {
+        return postoGraduacao;
+    }
+
+    public void setPostoGraduacao(PostoGraduacao postoGraduacao) {
+        this.postoGraduacao = postoGraduacao;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public String getNomeCompleto() {
-        return nomeCompleto.toUpperCase();
+        return nomeCompleto;
     }
 
     public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
+        this.nomeCompleto = nomeCompleto.toUpperCase();
     }
 
+    public String getNomeDeGuerra() {
+        return nomeDeGuerra;
+    }
+
+    public void setNomeDeGuerra(String nomeDeGuerra) {
+        this.nomeDeGuerra = nomeDeGuerra.toUpperCase();
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -94,6 +111,7 @@ public class Usuarios implements Serializable, UserDetails {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -102,28 +120,12 @@ public class Usuarios implements Serializable, UserDetails {
         this.password = password;
     }
 
-    public String getNomeDeGuerra() {
-        return nomeDeGuerra.toUpperCase();
-    }
-
-    public void setNomeDeGuerra(String nomeDeGuerra) {
-        this.nomeDeGuerra = nomeDeGuerra;
-    }
-    
     public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
-	public List<Role> getRoles() {
-    	return roles;
+        return pedidos;
     }
-    
-    public void setRoles(List<Role> roles) {
-    	this.roles = roles;
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override

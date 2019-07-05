@@ -42,20 +42,50 @@ public class Pedido implements Serializable{
 	@NotNull(message = "Informe a data de embarque")
 	private LocalDate dataDeEmbarque;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "Informe a data de chegada")
+	private LocalDate dataDeChegada;
+	
 	@NotNull(message = "Informe a hora de embarque")
 	private LocalTime horaDoEmbarque;
+	
+	@NotNull(message = "Informe a hora de chegada")
+	private LocalTime horaDeChegada;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataDoPedido;
 	
-	@NotBlank(message = "Informe o tipo da viatura")
-	private String tipoDeViatura;
+	@NotNull(message = "Informe o tipo da viatura")
+	private TipoViatura tipoDeViatura;
 	
-	@NotBlank(message = "Informe a finalidade do pedido")
-	private String finalidadeDoPedido;
+	@NotBlank(message = "Informe a descrição do pedido")
+	private String missaoDescricao;
+	
+	@NotBlank(message = "Informe a quem o motorista deverá se apresentar")
+	private String apresentacao;
 	
 	@NotBlank(message = "Informe o destino")
 	private String destino;
+
+	private Finalidade finalidade;
+
+	public StatusPedido getStatusPedido() {
+		return statusPedido;
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido;
+	}
+
+	private StatusPedido statusPedido;
+
+	public Finalidade getFinalidade() {
+		return finalidade;
+	}
+
+	public void setFinalidade(Finalidade finalidade) {
+		this.finalidade = finalidade;
+	}
 
 	public Long getId() {
 		return id;
@@ -121,20 +151,20 @@ public class Pedido implements Serializable{
 		this.dataDoPedido = dataDoPedido;
 	}
 
-	public String getTipoDeViatura() {
+	public TipoViatura getTipoDeViatura() {
 		return tipoDeViatura;
 	}
 
-	public void setTipoDeViatura(String tipoDeViatura) {
+	public void setTipoDeViatura(TipoViatura tipoDeViatura) {
 		this.tipoDeViatura = tipoDeViatura;
 	}
 
-	public String getFinalidadeDoPedido() {
-		return finalidadeDoPedido;
+	public String getMissaoDescricao() {
+		return missaoDescricao;
 	}
 
-	public void setFinalidadeDoPedido(String finalidadeDoPedido) {
-		this.finalidadeDoPedido = finalidadeDoPedido;
+	public void setMissaoDescricao(String missaoDescricao) {
+		this.missaoDescricao = missaoDescricao;
 	}
 
 	public String getDestino() {
@@ -143,6 +173,30 @@ public class Pedido implements Serializable{
 
 	public void setDestino(String destino) {
 		this.destino = destino;
+	}
+
+	public LocalDate getDataDeChegada() {
+		return dataDeChegada;
+	}
+
+	public void setDataDeChegada(LocalDate dataDeChegada) {
+		this.dataDeChegada = dataDeChegada;
+	}
+
+	public LocalTime getHoraDeChegada() {
+		return horaDeChegada;
+	}
+
+	public void setHoraDeChegada(LocalTime horaDeChegada) {
+		this.horaDeChegada = horaDeChegada;
+	}
+
+	public String getApresentacao() {
+		return apresentacao;
+	}
+
+	public void setApresentacao(String apresentacao) {
+		this.apresentacao = apresentacao;
 	}
 
 	@Override

@@ -25,7 +25,7 @@
                 <a class="nav-link" th:href="@{/motorista}">Motoristas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/pedidos}">Pedir Viatura</a>
+                <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/movimento}">Movimento de Viaturas</a>
@@ -34,7 +34,8 @@
         
         <div>
         	<span style="color:white; margin-right: 10px;">Usuário: </span>
-	        <span style="color:white; margin-right: 60px;" sec:authentication="name"></span>        
+	        <span style="color:white; margin-right: 60px;" sec:authentication="name"></span>
+            <span style="color:white; margin-right: 60px;"><a style="color:white; margin-right: 60px;" th:href="@{/usuarios/alterarsenha}">Alterar Senha</a></span>
         </div>
         
 

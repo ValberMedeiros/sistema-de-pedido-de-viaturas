@@ -27,21 +27,21 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="id">Id</label>
-            <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
+            <input type="text" class="form-control" id="id" placeholder="#" th:value="*{id}" readonly="true" th:field="*{id}">
         </div>
         <div class="form-group col-md-6">
             <label for="identidade">Identidade</label>
-            <input type="text" class="form-control" id="identidade" placeholder="Informe a identidade" name="identidade" th:field="*{identidade}">
+            <input type="text" class="form-control" id="identidade" placeholder="Informe a identidade" th:value="*{identidade}" th:field="*{identidade}">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="nomeCompleto">Nome Completo</label>
-            <input type="text" class="form-control" id="nomeCompleto" placeholder="Informe o nome completo" name="nomeCompleto" th:field="*{nomeCompleto}">
+            <label for="nomeCompleto">Nome completo</label>
+            <input type="text" class="form-control" id="nomeCompleto" placeholder="Informe o nome completo" th:value="*{nomeCompleto}" th:field="*{nomeCompleto}">
         </div>
         <div class="form-group col-md-3">
             <label for="nomeDeGuerra">Nome de Guerra</label>
-            <input type="text" class="form-control" id="nomeDeGuerra" placeholder="Informe o nome de guerra" name="nomeDeGuerra" th:field="*{nomeDeGuerra}">
+            <input type="text" class="form-control" id="nomeDeGuerra" placeholder="Informe o nome de guerra" th:value="*{nomeDeGuerra}" th:field="*{nomeDeGuerra}">
         </div>
         <div class="form-group col-md-3">
             <label for="postoGraduacao">Posto/Grad</label>

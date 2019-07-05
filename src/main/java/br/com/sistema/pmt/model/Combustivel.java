@@ -4,7 +4,8 @@ public enum Combustivel {
 	
 	GASOLINA("Gasolina"),
 	ALCOOL("Álcool"),
-	DIESEL("Diesel");
+	DIESEL("Diesel"),
+	FLEX("Flex");
 	
 	private String descricao;
 	

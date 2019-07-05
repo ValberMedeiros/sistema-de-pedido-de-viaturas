@@ -38,7 +38,10 @@ public class UsuarioController {
     private RolesRepository rr;
     
     @Autowired
-    private PostoGraduacaoRepository pr;  
+    private PostoGraduacaoRepository pr;
+
+    @Autowired
+    private UsuarioLogado ul;
 
     @RequestMapping(method = RequestMethod.GET, value = "/usuarios")
     public ModelAndView inicio(@ModelAttribute("filtro")Filter filtro){
@@ -50,11 +53,12 @@ public class UsuarioController {
     }
 
     @GetMapping("usuarios/cadastro")
-    public ModelAndView cadastroUsuario(@ModelAttribute("filtro")Filter filtro){
+    public ModelAndView cadastroUsuario(){
         ModelAndView modelAndView = new ModelAndView("cadastro/cadastrousuario");
         Iterable<PostoGraduacao> listPostoGrad = pr.findAll();
         Iterable<Role> listRoles = rr.findAll();
-        modelAndView.addObject( new Usuarios());
+        Usuarios usuarios = new Usuarios();
+        modelAndView.addObject("usuarios", usuarios);
         modelAndView.addObject("postoGrads", listPostoGrad);
         modelAndView.addObject("roles", listRoles);
 
@@ -102,5 +106,27 @@ public class UsuarioController {
         Iterable<Usuarios> usuariosIt = ur.findAll();
         modelAndView.addObject("usuarios", usuariosIt);
         return modelAndView;
+    }
+
+    @GetMapping("usuarios/alterarsenha")
+    public ModelAndView telaAlterarSenha(String senhaAtual, String novaSenha){
+        ModelAndView modelAndView = new ModelAndView("cadastro/cadastronovasenha");
+        return modelAndView;
+    }
+
+    @PostMapping("usuarios/alterarsenha")
+    public ModelAndView alterarSenha(String senhaAtual, String novaSenha){
+        ModelAndView modelAndView = new ModelAndView("cadastro/cadastronovasenha");
+        Usuarios usuario = ur.findByusername(ul.getUsuarioLogado().toString());
+
+        if(new BCryptPasswordEncoder().matches(senhaAtual, usuario.getPassword())){
+            usuario.setPassword(new BCryptPasswordEncoder().encode(novaSenha));
+            ur.save(usuario);
+            modelAndView.addObject("mensagem", "Senha alterada com sucesso");
+            return modelAndView;
+        }else{
+            modelAndView.addObject("mensagem", "Senha atual incorreta");
+            return modelAndView;
+        }
     }
 }

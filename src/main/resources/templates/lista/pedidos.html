@@ -31,11 +31,14 @@
 		<!-- Template do Menu de Navegação-->
 	</nav>
 	
-	<div class="card" style="margin: 60px 10px;">
+	<div class="card" style="margin: 60px 10px;" >
 		<div class="card-header">
 			<h4 class="float-left">Pedidos</h4>
-			<a th:href="@{/pedidos/cadastro}"><button title="Cadastrar pedido" type="button" class="btn btn-success float-right far fa-plus-square"></button></a>
-		</div>
+			<a sec:authorize="hasAnyRole('ROLE_CHEFE,ROLE_ADMIN')" style="margin-left: 30px" th:href="@{/pedidos/aprovar}"><button title="Aprovar Pedido" type="button" class="btn btn-primary"> Aprovar Pedido</button></a>
+			<a sec:authorize="hasAnyRole('ROLE_ESCALANTE,ROLE_ADMIN')" style="margin-left: 30px" th:href="@{/pedidos/incluirmotorista}"><button title="Incluir Motorista do Pedido" type="button" class="btn btn-primary"> Incluir Motorista do Pedido</button></a>
+			<a sec:authorize="hasAnyRole('ROLE_ESCALANTE,ROLE_ADMIN')" style="margin-left: 30px" th:href="@{/pedidos/incluirviatura}"><button title="Incluir Viatura do Pedido" type="button" class="btn btn-primary"> Incluir Viatura do Pedido</button></a>
+			<a th:href="@{/pedidos/cadastro}"><button title="Cadastrar pedido" type="button" class="btn btn-success float-right far fa-plus-square"> Cadastrar Pedido</button></a>
+        </div>
 		<div class="card-body">
 			<form class="form form-horizontal" method="get" th:object="${filtro}">
 				<div class="form-group">
@@ -56,16 +59,33 @@
 		                <thead>
 		                    <tr>
 		                        <th scope="col">#</th>
+								<th scope="col">Usuario</th>
 		                        <th scope="col">Destino</th>
 		                        <th scope="col">Data</th>
 		                        <th scope="col">Finalidade</th>
 		                        <th scope="col">Tipo de Viatura</th>
-		                        <th scope="col">Editar</th>
+								<th scope="col">Status Pedido</th>
+                                <th scope="col">Editar</th>
 		                        <th scope="col">Excluir</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
-		                    
+						<tr th:each="pedidos : ${pedido}"  th:if="${#strings.toString(pedidos.usuarioRemetente.username == usuarioLogado)}">
+							<td><a th:href="@{/pedidos/detalhado/{idpedido}(idpedido=${pedidos.id})}" th:text="${pedidos.id}"></a></td>
+							<td th:text="${pedidos.usuarioRemetente.nomeDeGuerra}"></td>
+							<td th:text="${pedidos.destino}"></td>
+							<td th:text="${pedidos.dataDeEmbarque}"></td>
+							<td th:text="${pedidos.finalidade.descricao}"></td>
+							<td th:text="${pedidos.tipoDeViatura.descricao}"></td>
+							<td ><span class="badge" th:text="${pedidos.statusPedido.descricao}"
+									   th:classappend="${#strings.toString(pedidos.statusPedido.descricao == 'Pedido deferido') ? 'badge-success' : 'badge-danger'}"/></td>
+							<td><a
+									th:href="@{/pedidos/editar/{idpedido}(idpedido=${pedidos.id})}"><button
+									class="far fa-edit btn btn-primary"></button></a></td>
+							<td><a
+									th:href="@{/pedidos/deletar/{idpedido}(idpedido=${pedidos.id})}"><button
+									class="far fa-trash-alt btn btn-danger"></button></a></td>
+						</tr>
 		                </tbody>
 		            </table>
 		       </div>
