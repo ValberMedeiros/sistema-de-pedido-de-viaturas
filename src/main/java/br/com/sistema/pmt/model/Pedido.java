@@ -15,59 +15,67 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Pedido implements Serializable{
+public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@ManyToOne
 	@org.hibernate.annotations.ForeignKey(name = "usuario_id")
 	private Usuarios usuarioRemetente;
-	
+
 	@ManyToOne
 	@org.hibernate.annotations.ForeignKey(name = "motorista_id")
 	private Motorista motoristaDoPedido;
-	
+
 	@ManyToOne
 	@org.hibernate.annotations.ForeignKey(name = "viatura_id")
 	private Viatura viaturaDoPedido;
-	
+
 	@NotBlank(message = "Informe o local de embarque")
 	private String localDeEmbarque;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull(message = "Informe a data de embarque")
 	private LocalDate dataDeEmbarque;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@NotNull(message = "Informe a data de chegada")
 	private LocalDate dataDeChegada;
-	
+
 	@NotNull(message = "Informe a hora de embarque")
 	private LocalTime horaDoEmbarque;
-	
+
 	@NotNull(message = "Informe a hora de chegada")
 	private LocalTime horaDeChegada;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataDoPedido;
-	
+
 	@NotNull(message = "Informe o tipo da viatura")
 	private TipoViatura tipoDeViatura;
-	
+
 	@NotBlank(message = "Informe a descrição do pedido")
 	private String missaoDescricao;
-	
+
 	@NotBlank(message = "Informe a quem o motorista deverá se apresentar")
 	private String apresentacao;
-	
+
 	@NotBlank(message = "Informe o destino")
 	private String destino;
+	
+	@NotBlank(message = "Informe o telefone de contato")
+	private String contatoPedido;
+
+	@NotBlank(message = "Informe o ramal")
+	private String ramalPedido;
 
 	private Finalidade finalidade;
+
+	private String justificativaRejeicao;
 
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
@@ -199,6 +207,30 @@ public class Pedido implements Serializable{
 		this.apresentacao = apresentacao;
 	}
 
+	public String getJustificativaRejeicao() {
+		return justificativaRejeicao;
+	}
+
+	public void setJustificativaRejeicao(String justificativaRejeicao) {
+		this.justificativaRejeicao = justificativaRejeicao;
+	}
+
+	public String getContatoPedido() {
+		return contatoPedido;
+	}
+
+	public void setContatoPedido(String contatoPedido) {
+		this.contatoPedido = contatoPedido;
+	}
+
+	public String getRamalPedido() {
+		return ramalPedido;
+	}
+
+	public void setRamalPedido(String ramalPedido) {
+		this.ramalPedido = ramalPedido;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -223,6 +255,5 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

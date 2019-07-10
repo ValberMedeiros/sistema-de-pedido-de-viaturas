@@ -2,6 +2,7 @@ package br.com.sistema.pmt.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -108,6 +109,15 @@ public class PedidoController {
 		modelAndView.addObject("pedido", pedidos);
         return modelAndView;
     }
+    
+    @GetMapping("pedidos/detalhado/{idpedido}")
+	public ModelAndView DetalharPedido(@PathVariable("idpedido") Long idpedido){
+		ModelAndView modelAndView = new ModelAndView("MestreDetail/DetalhePedidos");
+		Optional<Pedido> pedidoDetalhado = pr.findById(idpedido);
+		modelAndView.addObject("pedido", pedidoDetalhado);
+
+		return modelAndView;
+	}
 
 	@GetMapping("pedidos/detalhadoaprovar/{idpedido}")
 	public ModelAndView DetalharPedidoAprovar(@PathVariable("idpedido") Long idpedido){
@@ -130,11 +140,22 @@ public class PedidoController {
 
     @GetMapping("pedidos/rejeitar/{idpedido}")
     public ModelAndView RejeitarPedido(@PathVariable("idpedido") Long idpedido){
-        ModelAndView modelAndView = new ModelAndView("redirect:/pedidos/aprovar");
+        ModelAndView modelAndView = new ModelAndView("MestreDetail/DetalhePedidosRejeitar");
         Optional<Pedido> pedidoRejeitado = pr.findById(idpedido);
-        pedidoRejeitado.get().setStatusPedido(StatusPedido.REJEITADO);
-        pr.save(pedidoRejeitado.get());
+        modelAndView.addObject("pedido", pedidoRejeitado.get());
+        return modelAndView;
+    }
 
+    @PostMapping("pedidos/justificarejeitar")
+    public ModelAndView JustificarRejeicao(@ModelAttribute("filtro")Filter filtro, Pedido pedido){
+	    ModelAndView modelAndView = new ModelAndView("lista/pedidos");
+        pedido.setStatusPedido(StatusPedido.REJEITADO);
+        pr.save(pedido);
+        String pesquisa = filtro.getPesquisa() == null? "" : filtro.getPesquisa();
+        Iterable<Pedido> pedidos = pr.findAll();
+        modelAndView.addObject("pedido", pedidos);
+        String usuariosLogado = ul.getUsuarioLogado().toString();
+        modelAndView.addObject("usuarioLogado", usuariosLogado);
         return modelAndView;
     }
 
@@ -151,7 +172,7 @@ public class PedidoController {
 		ModelAndView modelAndView = new ModelAndView("MestreDetail/IncluirMotorista");
 		Optional<Pedido> pedidoDetalhado = pr.findById(idpedido);
 		List<Motorista> motoristas = mr.findAllStatusMotoristaProntos();
-		modelAndView.addObject("pedido", pedidoDetalhado);
+		modelAndView.addObject("pedido", pedidoDetalhado.get());
 		modelAndView.addObject("motoristas", motoristas);
 		return modelAndView;
 	}
@@ -159,11 +180,10 @@ public class PedidoController {
 	@PostMapping("pedidos/incluirmotorista")
 	public ModelAndView SalvarIncluirMotorista(@ModelAttribute("filtro")Filter filtro, Pedido pedido){
 		ModelAndView modelAndView = new ModelAndView("lista/incluirmotorista");
-		Optional<Pedido> pedidoDetalhado = pr.findById(pedido.getId());
 		List<Pedido> pedidos = (List<Pedido>) pr.findAll();
 		modelAndView.addObject("pedido", pedidos);
-		pedidoDetalhado.get().setStatusPedido(StatusPedido.VIATURA);
-		pr.save(pedidoDetalhado.get());
+		pedido.setStatusPedido(StatusPedido.VIATURA);
+		pr.save(pedido);
 		return modelAndView;
 	}
 
@@ -181,8 +201,10 @@ public class PedidoController {
 		Optional<Pedido> pedidoDetalhado = pr.findById(idpedido);
 		List<Pedido> pedidos = (List<Pedido>) pr.findAll();
 		List<Viatura> viaturas = vr.findViaturaProntas();
-		modelAndView.addObject("pedido", pedidoDetalhado);
+		List<Motorista> motoristas = mr.findAllStatusMotoristaProntos();
+		modelAndView.addObject("pedido", pedidoDetalhado.get());
 		modelAndView.addObject("viaturas", viaturas);
+		modelAndView.addObject("motoristas", motoristas);
 
 		return modelAndView;
 	}

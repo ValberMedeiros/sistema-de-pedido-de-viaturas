@@ -65,7 +65,6 @@
 		                        <th scope="col">Finalidade</th>
 		                        <th scope="col">Tipo de Viatura</th>
 								<th scope="col">Status Pedido</th>
-                                <th scope="col">Editar</th>
 		                        <th scope="col">Excluir</th>
 		                    </tr>
 		                </thead>
@@ -78,11 +77,8 @@
 							<td th:text="${pedidos.finalidade.descricao}"></td>
 							<td th:text="${pedidos.tipoDeViatura.descricao}"></td>
 							<td ><span class="badge" th:text="${pedidos.statusPedido.descricao}"
-									   th:classappend="${#strings.toString(pedidos.statusPedido.descricao == 'Pedido deferido') ? 'badge-success' : 'badge-danger'}"/></td>
-							<td><a
-									th:href="@{/pedidos/editar/{idpedido}(idpedido=${pedidos.id})}"><button
-									class="far fa-edit btn btn-primary"></button></a></td>
-							<td><a
+									   th:classappend="${#strings.toString(pedidos.statusPedido.descricao == 'Pedido deferido') ? 'badge-success' : 'badge-danger'}" th:alt-title="${pedidos.justificativaRejeicao}"/></td>
+							<td><a	sec:authorize="hasAnyRole('ROLE_CHEFE,ROLE_ADMIN')"
 									th:href="@{/pedidos/deletar/{idpedido}(idpedido=${pedidos.id})}"><button
 									class="far fa-trash-alt btn btn-danger"></button></a></td>
 						</tr>

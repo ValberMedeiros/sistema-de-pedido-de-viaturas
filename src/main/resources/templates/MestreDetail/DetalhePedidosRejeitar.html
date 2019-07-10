@@ -56,11 +56,15 @@
 <nav th:insert="template :: nav">
     <!-- Template do Menu de Navegação-->
 </nav>
-<form th:attr="action=@{/pedidos/incluirviatura}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${pedido}">
+<form th:attr="action=@{/pedidos/justificarejeitar}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${pedido}">
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="id">Id</label>
             <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="usuarioRemetente">Usuario remetente</label>
+            <input type="text" class="form-control" id="usuarioRemetente" name="usuarioRemetente" readonly="true" th:field="*{usuarioRemetente}">
         </div>
         <div class="form-group col-md-2">
             <label for="dataDeEmbarque">Data do embarque</label>
@@ -70,7 +74,7 @@
             <label for="horaDoEmbarque">Hora do embarque</label>
             <input type="text" class="form-control" id="horaDoEmbarque" placeholder="Informe a hora do embarque" name="horaDoEmbarque" readonly="true" th:field="*{horaDoEmbarque}">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="localDeEmbarque">Local do embarque</label>
             <input type="text" class="form-control" id="localDeEmbarque" placeholder="Informe o local de embarque" name="localDeEmbarque" readonly="true" th:field="*{localDeEmbarque}">
         </div>
@@ -83,6 +87,10 @@
         <div class="form-group col-md-2">
             <label for="horaDoChegada">Hora da chegada</label>
             <input type="text" class="form-control" id="horaDoChegada" placeholder="Informe a hora da chegada" name="horaDoChegada" readonly="true" th:field="*{horaDeChegada}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dataDoPedido">Data do Pedido</label>
+            <input type="text" class="form-control" id="dataDoPedido" placeholder="Informe a data de chegada" name="dataDoPedido" readonly="true" th:field="*{dataDoPedido}">
         </div>
         <div class="form-group col-md-8">
             <label for="destino">Destino</label>
@@ -113,17 +121,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="destino">Apresentar-se ao</label>
-            <input type="text" class="form-control" id="apresentacao" placeholder="O motorista devera se apresentar ao" name="apresentacao" readonly="true" th:field="*{apresentacao}">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="motoristaDoPedido">Motorista</label>
-            <select class="form-control" name="motoristaDoPedido" id="motoristaDoPedido" readonly="true" th:field="*{motoristaDoPedido}">
-
-                <option th:each="motorista : ${motoristas}"
-                        th:value="${motorista.getId()}"
-                        th:utext="${motorista.getPostoGraduacaoMotorista().getPostoGrad() + ' ' + motorista.getNomeDeGuerra()}"
-                ></option>
-            </select>
+            <input type="text" class="form-control" id="apresentacao" readonly="true" placeholder="O motorista devera se apresentar ao" name="apresentacao" th:field="*{apresentacao}">
         </div>
         <div class="form-group col-md-2">
             <label for="contatoPedido">Telefone de Contato: (Com DDD)</label>
@@ -135,18 +133,6 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-2">
-            <label for="viaturaDoPedido">Viatura</label>
-            <select class="form-control" name="viaturaDoPedido" id="viaturaDoPedido" th:field="*{viaturaDoPedido}">
-
-                <option th:each="viatura : ${viaturas}"
-                        th:value="${viatura.id}"
-                        th:text="${viatura.modelo + ' placa ' + viatura.placa}"
-                ></option>
-            </select>
-        </div>
-    </div>
-    <div class="form-row">
         <div class="form-group col-md-12">
             <label for="missaoDescricao">Descreva a missão</label>
             <textarea class="form-control" id="missaoDescricao" row="8" placeholder="Descreva a missão" name="missaoDescricao" readonly="true" th:field="*{missaoDescricao}"> </textarea>
@@ -154,10 +140,12 @@
     </div>
 
     <div class="form-row">
-
+		<div class="form-group col-md-12">
+			<label for="justificativaRejeicao">Informe a justificativa da rejeição do pedido</label>
+			<textarea class="form-control" id="justificativaRejeicao" row="8" placeholder="Informe a justificativa da rejeição do pedido" name="justificativaRejeicao" th:field="*{justificativaRejeicao}"> </textarea>
+		</div>
     </div>
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-    <a th:href="@{/pedidos/incluirmotorista}"><button type="button" class="btn btn-danger">Voltar</button></a>
+    <button type="submit" class="btn btn-danger">Rejeitar Pedido</button></a>
 </form>
 
 </body>

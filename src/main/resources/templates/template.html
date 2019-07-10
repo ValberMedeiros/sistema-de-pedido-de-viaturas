@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav th:fragment="nav" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="index">Sistema de Pedido de Viaturas</a>
+    <a class="navbar-brand" th:href="@{/}">Sistema de Pedido de Viaturas</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,9 +26,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/movimento}">Movimento de Viaturas</a>
             </li>
         </ul>
         
