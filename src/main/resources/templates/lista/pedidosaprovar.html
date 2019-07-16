@@ -64,7 +64,7 @@
                         <th scope="col">Editar</th>
                         <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN,ROLE_CHEFE')">Aprovar</th>
                         <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN,ROLE_CHEFE')">Rejeitar</th>
-                        <th scope="col">Excluir</th>
+                        <th scope="col" sec:authorize="hasAnyRole('ROLE_ADMIN')">Excluir</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,6 +89,7 @@
                                 th:href="@{/pedidos/rejeitar/{idpedido}(idpedido=${pedidos.id})}"><button
                                 class="far fa-times-circle btn btn-danger"></button></a></td>
                         <td><a
+                                sec:authorize="hasAnyRole('ROLE_ADMIN')"
                                 th:href="@{/pedidos/deletar/{idpedido}(idpedido=${pedidos.id})}"><button
                                 class="far fa-trash-alt btn btn-danger"></button></a></td>
                     </tr>
