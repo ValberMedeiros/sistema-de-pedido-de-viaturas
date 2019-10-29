@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema de Pedido de Viaturas">
+    <meta name="author" content="3º Sargento Valber Junior">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+	<script>
+	$(function() {
+	    $( "#identidade" ).mask("000000000-0");
+	});
+	</script>
+    <title>Sistema de Pedido de Viaturas</title>
+</head>
+<body>
+<nav th:insert="template :: nav"><!-- Template do Menu de Navegação--></nav></head>
+<form th:attr="action=@{/usuarios/salvarUsuario}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${usuarios}">
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<span th:text="${mensagem}">Usuário salvo com sucesso!</span>
+	</div>
+	<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+	<div th:each="detailedError : ${#fields.detailedErrors()}">
+		<span th:text="${detailedError.message}"></span>
+	</div>
+	</div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" placeholder="#" th:value="*{id}" readonly="true" th:field="*{id}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="identidade">Identidade</label>
+            <input type="text" class="form-control" id="identidade" placeholder="Informe a identidade" th:value="*{identidade}" th:field="*{identidade}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="nomeCompleto">Nome completo</label>
+            <input type="text" class="form-control" id="nomeCompleto" placeholder="Informe o nome completo" th:value="*{nomeCompleto}" th:field="*{nomeCompleto}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="nomeDeGuerra">Nome de Guerra</label>
+            <input type="text" class="form-control" id="nomeDeGuerra" placeholder="Informe o nome de guerra" th:value="*{nomeDeGuerra}" th:field="*{nomeDeGuerra}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="postoGraduacao">Posto/Grad</label>
+            <select class="form-control" name="postoGraduacao" id="postoGraduacao" th:field="*{postoGraduacao}">
+
+                <option th:each="posto : ${postoGrads}"
+                        th:value="${posto.getPostoGraduacao_id()}"
+                        th:utext="${posto.getPostoGrad()}"
+                        th:selected="${posto.getPostoGraduacao_id() eq postoSelecionado}"
+                ></option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="userName">Nomde de Usuário</label>
+            <input type="text" class="form-control" id="userName" placeholder="Informe o nome de usuário" name="username" th:field="*{username}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" placeholder="Informe a senha do usuário" name="password" th:field="*{password}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="role">Tipo de Usuário</label>
+            <select multiple class="form-control col-md-8" name="roles" id="role" th:field="*{roles}">
+
+                <option th:each="role : ${roles}"
+                        th:value="${role.getId()}"
+                        th:utext="${role.getNomeRole()}"
+                ></option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a th:href="@{/usuarios}"><button type="button" class="btn btn-danger">Voltar</button></a>
+</form>
+</body>
+</html>

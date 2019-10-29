@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+    <title>Sistema de Pedido de Viaturas</title>
+    <link rel="shortcut icon" type="imagem/ico" th:src="@{/favicon.ico}">
+    <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <div class="row">
+        <div class="mx-auto" style="margin-top: 1%;">
+			<div class="text-center" style="margin-bottom: 30px;">
+				<img alt="logo base" th:src="@{images/distintivoBase.png}" width="170px" height="190px">
+			</div>
+            <h3 class="text-center">Sistema de Pedido de Viaturas da B Adm Ap/CMP</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mx-auto">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Usuario/senha invalidos!</div>
+            </div>
+
+            <div th:if="${param.logout}">
+                <div class="alert alert-info">Usuário desconectado!</div>
+            </div>
+
+            <div class="card" style="margin-top: 7%;">
+                <h5 class="card-header">Informe usuario e senha</h5>
+                <div class="card-body">
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group">
+                            <label>Login:<input autofocus="autofocus" class="form-control" type="text" name="username" placeholder="Usuario"/></label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Senha:<input class="form-control" type="password" name="password" placeholder="Senha"/></label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" id="remember-me" name="remember-me"/>
+                            <label for="remember-me">Lembrar</label>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0; width: 100%; text-align: center">
+        <h4 style="font-size: 10px; color: gray">Desenvolvido por 3º Sgt SCT VALBER JUNIOR - B ADM AP/CMP</h4>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

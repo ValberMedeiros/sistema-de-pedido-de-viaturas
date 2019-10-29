@@ -1,0 +1,154 @@
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Sistema de Pedido de Viaturas">
+<meta name="author" content="3º Sargento Valber Junior">
+<meta name="generator" content="Jekyll v3.8.5">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script>
+$(function() {
+    $( "#dataDeEmbarque" ).datepicker({
+    	dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+        selectOtherMonths: true,
+    	showOtherMonths: true,
+    });
+    $( "#dataDeChegada" ).datepicker({
+    	dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+        selectOtherMonths: true,
+    	showOtherMonths: true,
+    });
+    $( "#horaDoEmbarque, #horaDoChegada" ).mask("00:00");
+    $( "#contatoPedido" ).mask("(00) 00000-0000");
+    $( "#ramalPedido" ).mask("0000-0000");
+});
+</script>
+<title>Sistema de Pedido de Viaturas</title>
+</head>
+<body>
+	<nav th:insert="template :: nav">
+		<!-- Template do Menu de Navegação-->
+	</nav>
+	<form th:attr="action=@{/pedidos/salvarPedido}" method="post" style="margin-top: 70px; padding: 0px 10px;" th:object="${pedido}">
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		<span th:text="${mensagem}">Pedido salvo com sucesso!</span>
+	</div>
+	<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+	<div th:each="detailedError : ${#fields.detailedErrors()}">
+		<span th:text="${detailedError.message}"></span>
+	</div>
+	</div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" placeholder="#" name="id" readonly="true" th:field="*{id}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="dataDeEmbarque">Data do embarque</label>
+            <input type="text" class="form-control" id="dataDeEmbarque" autocomplete="off" placeholder="Informe a data do embarque" name="dataDeEmbarque" th:field="*{dataDeEmbarque}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="horaDoEmbarque">Hora do embarque</label>
+            <input type="text" class="form-control" id="horaDoEmbarque" placeholder="Informe a hora do embarque" name="horaDoEmbarque" th:field="*{horaDoEmbarque}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="localDeEmbarque">Local do embarque</label>
+            <input type="text" class="form-control" id="localDeEmbarque" placeholder="Informe o local de embarque" name="localDeEmbarque" th:field="*{localDeEmbarque}">
+        </div>
+    </div>
+    <div class="form-row">
+    	<div class="form-group col-md-2">
+            <label for="dataDeChegada">Data da chegada</label>
+            <input type="text" class="form-control" id="dataDeChegada" autocomplete="off" placeholder="Informe a data de chegada" name="dataDeChegada" th:field="*{dataDeChegada}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="horaDoChegada">Hora da chegada</label>
+            <input type="text" class="form-control" id="horaDoChegada" placeholder="Informe a hora da chegada" name="horaDoChegada" th:field="*{horaDeChegada}">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="destino">Destino</label>
+            <input type="text" class="form-control" id="destino" placeholder="Informe o destino" name="destino" th:field="*{destino}">
+        </div>
+
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="tipoDeviatura">Tipo de viatura</label>
+            <select class="form-control" name="tipoDeviatura" id="tipoDeviatura" th:field="*{tipoDeViatura}">
+
+                <option th:each="tipoDeviatura : ${tiposDeViatura}"
+                        th:value="${tipoDeviatura}"
+                        th:text="${tipoDeviatura.getDescricao()}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="finalidade">Finalidade</label>
+            <select class="form-control" name="finalidade" id="finalidade" th:field="*{finalidade}">
+
+                <option th:each="finalidade : ${finalidades}"
+                        th:value="${finalidade}"
+                        th:text="${finalidade.getDescricao()}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="destino">Apresentar-se ao</label>
+            <input type="text" class="form-control" id="apresentacao" placeholder="O motorista devera se apresentar ao" name="apresentacao" th:field="*{apresentacao}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="contatoPedido">Telefone de Contato</label>
+            <input type="tel" pattern="\([0-9]{2}\)[\s][0-9]{5}-[0-9]{4}" class="form-control" id="contatoPedido" placeholder="Informe o telefone de contato" name="contatoPedido" th:field="*{contatoPedido}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="ramalPedido">Ramal</label>
+            <input type="tel" pattern="\[0-9]{4}-[0-9]{4}" class="form-control" id="ramalPedido" placeholder="Informe o ramal" name="ramalPedido" th:field="*{ramalPedido}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="missaoDescricao">Descreva a missão</label>
+            <textarea class="form-control" id="missaoDescricao" row="8" placeholder="Descreva a missão" name="missaoDescricao" th:field="*{missaoDescricao}"> </textarea>
+        </div>
+    </div>
+
+    <div class="form-row">
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+    <a th:href="@{/pedidos}"><button type="button" class="btn btn-danger">Voltar</button></a>
+</form>
+
+</body>
+</html>

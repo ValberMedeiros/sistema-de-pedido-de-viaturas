@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+<nav th:fragment="nav" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" th:href="@{/}"><img th:src="@{images/distintivoBase.png}" width="30px" height="30px" style="margin-right: 10px;">Sistema de Pedido de Viaturas</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse" role="tablist">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
+            </li>
+            <li sec:authorize="hasAnyRole('ROLE_MECANICO,ROLE_ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/viaturas}">Viaturas</a>
+            </li>
+            <li sec:authorize="hasAnyRole('ROLE_ADMIN,ROLE_ESCALANTE')" class="nav-item">
+                <a class="nav-link" th:href="@{/motorista}">Motoristas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
+            </li>
+        </ul>
+        
+        <div>
+        	<span style="color:white; margin-right: 10px;">Usuário: </span>
+	        <span style="color:white; margin-right: 60px;" sec:authentication="name"></span>
+            <span style="color:white; margin-right: 60px;"><a style="color:white; margin-right: 60px;" th:href="@{/usuarios/alterarsenha}">Alterar Senha</a></span>
+        </div>
+        
+
+        <form th:action="@{/logout}" method="post" style="margin: 0px 0px;">
+            <button type="submit" class="btn btn-light">
+                Sair
+            </button>
+        </form>
+    </div>
+    <script>
+        $('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+    </script>
+</nav>
+
+</body>
+</html>
