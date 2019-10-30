@@ -164,7 +164,7 @@ public class PedidoController {
 	public ModelAndView DetalharPedidoAprovar(@PathVariable("idpedido") Long idpedido){
 		ModelAndView modelAndView = new ModelAndView("MestreDetail/DetalhePedidosAprovar");
 		Optional<Pedido> pedidoDetalhado = pr.findById(idpedido);
-		modelAndView.addObject("pedido", pedidoDetalhado);
+		modelAndView.addObject("pedido", pedidoDetalhado.get());
 
 		return modelAndView;
 	}

@@ -71,6 +71,16 @@ public class Pedido implements Serializable {
 
 	private String justificativaRejeicao;
 
+	private Long quantidadePassageiros;
+
+	public Long getQuantidadePassageiros() {
+		return quantidadePassageiros;
+	}
+
+	public void setQuantidadePassageiros(Long quantidadePassageiros) {
+		this.quantidadePassageiros = quantidadePassageiros;
+	}
+
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}

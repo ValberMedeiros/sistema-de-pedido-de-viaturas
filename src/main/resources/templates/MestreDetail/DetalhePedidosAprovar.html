@@ -70,9 +70,13 @@
             <label for="horaDoEmbarque">Hora do embarque</label>
             <input type="text" class="form-control" id="horaDoEmbarque" placeholder="Informe a hora do embarque" name="horaDoEmbarque" readonly="true" th:field="*{horaDoEmbarque}">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="localDeEmbarque">Local do embarque</label>
             <input type="text" class="form-control" id="localDeEmbarque" placeholder="Informe o local de embarque" name="localDeEmbarque" readonly="true" th:field="*{localDeEmbarque}">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="quantidadePassageiros">Quantidade de passageiros</label>
+            <input type="text" class="form-control" id="quantidadePassageiros" readonly="true"  name="quantidadePassageiros" th:value="*{quantidadePassageiros}">
         </div>
     </div>
     <div class="form-row">
